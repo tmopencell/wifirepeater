@@ -1,9 +1,9 @@
 # Wifi Repeater
 ## A DIY wifi repeater using a Raspberry Pi zero
 
-The goal of this project was to understand a bit more about how wifi routers work. There are some great tutorials of how to build a router using a raspi but I struggled to find a functional **router** using a raspberry pi zero. This would be handy and in principle quite affordable to since the rapi zero is just $5 and a cheap wifi card is about £10.
+The goal of this project was to understand a bit more about how wifi repeaters work. There are some great tutorials of how to build a router using a raspi but I struggled to find a functional **repeater** or **range extender** using a raspberry pi zero. This would be handy and (in principle) quite affordable to since the rapi zero is just $5 and a cheap usb wifi card is about £10.
 
-The raspi has an onboard wifi antenna and it is [apparently very good]() with nanostructured antennae to add directionality. You will need to buy an extra usb wifi card and I bought an XXX? SO one wifi acts as the receiver and another the transmitter. 
+The raspi has an onboard wifi antenna and it is [apparently very good](https://magpi.raspberrypi.org/articles/pi-zero-w-wireless-antenna-design) with antennae placed in an etched resonant cavity to amplify signal. You will need to buy an extra usb wifi card and I bought [this](https://www.amazon.co.uk/dp/B07NYFKQB1/ref=cm_sw_r_tw_dp_U_x_93gQDbFF200SW). The _chipset_ for this card is Realtek which tends to have linux compatible drivers but worth checking the amazon reviews/questions first. The idea is that you need two wifi antennae (the built in one and the usb one). One wifi acts as the receiver and another the transmitter. 
 
 You could also consider using this as a portable [Raspi VPS](https://opensource.com/article/19/6/raspberry-pi-vpn-server)! Please let me know if you do this since it  might be a useful project. 
 
@@ -185,10 +185,10 @@ Output from my computer when connnected Pi-Extender Network:
 round-trip min/avg/max/stddev = 10.286/25.701/161.280/27.542 ms
 ```
 
-You can see the roundtrip is doubled and actually important to note the differences between the **max and **min** speeds and the **stddev** (standard deviation, the variation in times), it is the source of the _flakiness_. Sommetimes loads lightning quick and other times takes ages.  
+You can see the roundtrip is doubled and actually important to note the differences between the **max** and **min** speeds and the **stddev** (standard deviation, the variation in times), it is the source of the _flakiness_. Sommetimes loads lightning quick and other times takes ages.  
 
 
-**NOTE: Please help! ** The physical distance from London to Mountain View, California (where [216.58.213.1](https://ipinfo.io/216.58.213.1) _supposedly_ lives) is 8,631 km or (8.6 x 10^6 m). If it takes 8 ms (or 8x 10^-3 s) to get there and the speed of light is fixed (at 2 x 10^8 m/s in optical fibres) then we have got a little issue of a breach of the laws of physics.. The shortest possible time to travel that distance is roughly 43ms (double assuming reply)... hmmm. Maybe someone can help me out here? Even assuming the computer/server adds no delay to the system if one of the pings takes only 8ms then the location is within 1600 km. Since the server is probably not in the ocean (probably..) then it is either in Ireland somewhere or somewhere in continental europe as far east as about Poland or as south to Spain. 
+**NOTE: Please help!** The physical distance from London to Mountain View, California (where [216.58.213.1](https://ipinfo.io/216.58.213.1) _supposedly_ lives) is 8,631 km or (8.6 x 10^6 m). If it takes 8 ms (or 8x 10^-3 s) to get there and the speed of light is fixed (at 2 x 10^8 m/s in optical fibres) then we have got a little issue of a breach of the laws of physics.. The shortest possible time to travel that distance is roughly 43ms (double assuming reply)... hmmm. Maybe someone can help me out here? Even assuming the computer/server adds no delay to the system if one of the pings takes only 8ms then the location is within 1600 km. Since the server is probably not in the ocean (probably..) then it is either in Ireland somewhere or somewhere in continental europe as far east as about Poland or as south to Spain. 
 
 
 ## Suggestions for improvements
@@ -199,5 +199,15 @@ I don't think the wifi cards are the problem. I have used the Raspi as a wifi **
 
 Happy repeating!
 
+**ASIDE**  
+
+If you have are contributing and get this error after pusshing changes:  
+
+`ERROR: Authentication error: Authentication required: You must have push access to verify locks`  
+Then the following witchcraft might help:  
+
+`git lfs update`  
+
+Also utter this phrase three times: _"praise be to the gitlord"_ while wishing really hard for it to work. 
 
 
