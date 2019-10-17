@@ -5,16 +5,20 @@ The goal of this project was to understand a bit more about how wifi routers wor
 
 The raspi has an onboard wifi antenna and it is [apparently very good]() with nanostructured antennae to add directionality. You will need to buy an extra usb wifi card and I bought an XXX? SO one wifi acts as the receiver and another the transmitter. 
 
+You could also consider using this as a portable [Raspi VPS](https://opensource.com/article/19/6/raspberry-pi-vpn-server)! Please let me know if you do this since it  might be a useful project. 
+
 ## Build: Copy the image
 
 I made a disk image and all you need to do is clone this repo. 
 
 `git clone https://github.com/tmopencell/wifirepeater.git`  
 
-`cd wifirepeater` 
+`cd wifirepeater`  
 
-`unzip raspizero_wifirepeater.dmg.zip`
-## For Mac Users 
+`unzip raspizero_wifirepeater.dmg.zip`  
+
+
+## For Mac Users  
 
 Type `diskutil list` and note the names of the drives in the form `/dev/disk**X**`. Then write down the size of the SD card you will be using. Insert the SD card into your reader on your laptop. Now type `diskutil list` and look for the drive that was not there previously, for example: `/dev/disk3`. Look at the file size, does it roughly match the size that you recorded previously? If so you are good to proceed. Copy the drive number.  
 
@@ -155,8 +159,36 @@ Please change the password by typing `sudo raspi-config` and select **change use
 I also like to use an ssh key for login and to disable password login altogether. You can read about how to do this [here](https://raspi.tv/2012/how-to-set-up-keys-and-disable-password-login-for-ssh-on-your-raspberry-pi). 
 
 ## Performance
-This was a first attempt and the performance was.. Terrible.. The summary outputs of `ping google.com` when I am connected to my main network and when I am then connected to the extender network. I also did an internet [speed test](https://www.speedtest.net) and the results were about an order of magnitude drop in speed. 
+This was a first attempt and the performance was.. Terrible.. The summary outputs of `ping google.com` when I am connected to my main network and when I am then connected to the extender network. I also did an internet [speed test](https://www.speedtest.net) and the results were about an order of magnitude drop in speed (100 mb/sec vs 10 mb/sec). 
 
+Output from main normal network:  
+
+```
+--- google.com ping statistics ---
+29 packets transmitted, 29 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 8.403/15.406/97.911/20.073 ms 
+```   
+
+Output from my Raspi when connected to main network:  
+
+```
+--- google.com ping statistics ---
+33 packets transmitted, 33 received, 0% packet loss, time 32047ms
+rtt min/avg/max/mdev = 8.641/13.662/104.204/16.463 ms
+```
+
+Output from my computer when connnected Pi-Extender Network:  
+ 
+```
+--- google.com ping statistics ---
+47 packets transmitted, 47 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 10.286/25.701/161.280/27.542 ms
+```
+
+You can see the roundtrip is doubled and actually important to note the differences between the **max and **min** speeds and the **stddev** (standard deviation, the variation in times), it is the source of the _flakiness_. Sommetimes loads lightning quick and other times takes ages.  
+
+
+**NOTE: Please help! ** The physical distance from London to Mountain View, California (where [216.58.213.1](https://ipinfo.io/216.58.213.1) _supposedly_ lives) is 8,631 km or (8.6 x 10^6 m). If it takes 8 ms (or 8x 10^-3 s) to get there and the speed of light is fixed (at 2 x 10^8 m/s in optical fibres) then we have got a little issue of a breach of the laws of physics.. The shortest possible time to travel that distance is roughly 43ms (double assuming reply)... hmmm. Maybe someone can help me out here? Even assuming the computer/server adds no delay to the system if one of the pings takes only 8ms then the location is within 1600 km. Since the server is probably not in the ocean (probably..) then it is either in Ireland somewhere or somewhere in continental europe as far east as about Poland or as south to Spain. 
 
 
 ## Suggestions for improvements
@@ -166,3 +198,6 @@ I don't think the wifi cards are the problem. I have used the Raspi as a wifi **
  IP addresses rather than just hardware limitations.
 
 Happy repeating!
+
+
+
