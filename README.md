@@ -1,8 +1,6 @@
 # Wifi Repeater
 ## A DIY wifi repeater using a Raspberry Pi zero
 
-#This is a test change to check if updates are being committed.
-
 The goal of this project was to understand a bit more about how wifi routers work. There are some great tutorials of how to build a router using a raspi but I struggled to find a functional **router** using a raspberry pi zero. This would be handy and in principle quite affordable to since the rapi zero is just $5 and a cheap wifi card is about £10.
 
 The raspi has an onboard wifi antenna and it is [apparently very good]() with nanostructured antennae to add directionality. You will need to buy an extra usb wifi card and I bought an XXX? SO one wifi acts as the receiver and another the transmitter. 
@@ -15,6 +13,7 @@ I made a disk image and all you need to do is clone this repo.
 
 `cd wifirepeater` 
 
+`unzip raspizero_wifirepeater.dmg.zip`
 ## For Mac Users 
 
 Type `diskutil list` and note the names of the drives in the form `/dev/disk**X**`. Then write down the size of the SD card you will be using. Insert the SD card into your reader on your laptop. Now type `diskutil list` and look for the drive that was not there previously, for example: `/dev/disk3`. Look at the file size, does it roughly match the size that you recorded previously? If so you are good to proceed. Copy the drive number.  
@@ -153,4 +152,17 @@ password: raspberry
 
 Please change the password by typing `sudo raspi-config` and select **change user password**
 
-I also like to use an ssh key for login and to disable password login altogher. You can read about how to do this [here](https://raspi.tv/2012/how-to-set-up-keys-and-disable-password-login-for-ssh-on-your-raspberry-pi)
+I also like to use an ssh key for login and to disable password login altogether. You can read about how to do this [here](https://raspi.tv/2012/how-to-set-up-keys-and-disable-password-login-for-ssh-on-your-raspberry-pi). 
+
+## Performance
+This was a first attempt and the performance was.. Terrible.. The summary outputs of `ping google.com` when I am connected to my main network and when I am then connected to the extender network. I also did an internet [speed test](https://www.speedtest.net) and the results were about an order of magnitude drop in speed. 
+
+
+
+## Suggestions for improvements
+I suspect much of the issues are coming from the DNS side. If the unit was set up more as an access point (i.e., not issuing IP address leases) then it would be quicker, the DNSMASQ that I use is probably not the best and I don't know enough to optimise it. This would be my recommended first port of call. 
+
+I don't think the wifi cards are the problem. I have used the Raspi as a wifi **router** previously and while it does throttle the speed (usually about 30/40 mb/sec) it is still quick. This is true for the external antenna as well. Thus I think the issue is more in the computational task (the witchcraft of which I do not claim to understand) of issuing/managing
+ IP addresses rather than just hardware limitations.
+
+Happy repeating!
