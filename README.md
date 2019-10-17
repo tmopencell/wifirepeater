@@ -1,6 +1,8 @@
 # Wifi Repeater
 ## A DIY wifi repeater using a Raspberry Pi zero
 
+#This is a test change to check if updates are being committed.
+
 The goal of this project was to understand a bit more about how wifi routers work. There are some great tutorials of how to build a router using a raspi but I struggled to find a functional **router** using a raspberry pi zero. This would be handy and in principle quite affordable to since the rapi zero is just $5 and a cheap wifi card is about £10.
 
 The raspi has an onboard wifi antenna and it is [apparently very good]() with nanostructured antennae to add directionality. You will need to buy an extra usb wifi card and I bought an XXX? SO one wifi acts as the receiver and another the transmitter. 
